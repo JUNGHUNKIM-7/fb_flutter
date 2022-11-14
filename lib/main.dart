@@ -51,7 +51,6 @@ class MyApp extends ConsumerWidget {
             ? const App()
             : GestureDetector(
                 onTap: () => FocusScope.of(context).focusedChild?.unfocus(),
-                //todo: replace signUp/In/Out body
                 child: const SignInScreen(
                   providerConfigs: [
                     EmailProviderConfiguration(),
@@ -137,19 +136,18 @@ class TodoList extends ConsumerWidget {
           itemCount: c$.docs.length,
           itemBuilder: (context, index) {
             final DocumentSnapshot doc = c$.docs[index];
-            final Map<String, dynamic> data =
-                doc.data() as Map<String, dynamic>;
+            final Todo data = doc.data() as Todo;
             return GestureDetector(
               onLongPress: () async {
-                await crud.update(data["header"]);
+                await crud.update(data.header);
               },
               onTap: () async {
-                await crud.delete(data["header"]);
+                await crud.delete(data.header);
               },
               child: ListTile(
-                title: Text("${data["header"]}"),
-                subtitle: Text("${data["body"]}"),
-                trailing: Text("${data["isCompleted"]}"),
+                title: Text(data.header),
+                subtitle: Text(data.body),
+                trailing: Text("${data.isCompleted}"),
               ),
             );
           },

@@ -8,8 +8,6 @@ class SingleController {
   SingleController._();
   factory SingleController.getInstance() => SingleController._();
 
-  final todos = BaseController<List<Todo>>([].cast<Todo>());
-
   final userEmail = BaseController<String?>(null);
   final passwordEmail = BaseController<String?>(null);
   final todoHeader = BaseController<String?>(null);

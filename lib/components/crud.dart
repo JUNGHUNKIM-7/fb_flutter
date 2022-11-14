@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:newdemo/local/providers.dart';
-import 'package:newdemo/model/todo/todo.dart';
 import 'package:newdemo/stream/base.dart';
 import 'package:newdemo/stream/stream_controller.dart';
 

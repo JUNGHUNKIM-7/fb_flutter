@@ -11,8 +11,13 @@ class CrudMain {
   final FirebaseFirestore ins = FirebaseFirestore.instance;
   CollectionReference<Map<String, dynamic>> get collection =>
       ins.collection("todos");
-  Stream<QuerySnapshot<Map<String, dynamic>>> get collectionStream =>
-      collection.snapshots();
+
+  Stream<QuerySnapshot<Todo>> get collectionStream => collection
+      .withConverter<Todo>(
+        fromFirestore: (snapshot, _) => Todo.fromJson(snapshot.data()!),
+        toFirestore: (movie, _) => movie.toJson(),
+      )
+      .snapshots();
 
   late var body = <String, dynamic>{};
   User? user;
@@ -56,6 +61,7 @@ class CrudMain {
   Future<void> update(String header) async {
     final docId = await getDocIdByFilters(header);
     final doc = collection.doc(docId);
+
     final bool isCompletedStatus =
         await doc.get().then((d) => d.data()!["isCompleted"]);
     await doc.update(

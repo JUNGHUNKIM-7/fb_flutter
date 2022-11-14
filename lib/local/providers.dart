@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newdemo/repository/crud.dart';
+import '../model/todo/todo.dart';
 
 import '../repository/auth.dart';
 import '../stream/stream_controller.dart';
@@ -33,6 +34,6 @@ final userExistStreamProvider = StreamProvider<User?>(
 );
 
 final collectionStreamProvider =
-    StreamProvider<QuerySnapshot<Map<String, dynamic>>>((ref) async* {
+    StreamProvider<QuerySnapshot<Todo>>((ref) async* {
   yield* ref.watch(crudProvider).collectionStream;
 });
