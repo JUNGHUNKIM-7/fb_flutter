@@ -15,7 +15,7 @@ class CrudMain {
   Stream<QuerySnapshot<Todo>> get collectionStream => collection
       .withConverter<Todo>(
         fromFirestore: (snapshot, _) => Todo.fromJson(snapshot.data()!),
-        toFirestore: (movie, _) => movie.toJson(),
+        toFirestore: (todo, _) => todo.toJson(),
       )
       .snapshots();
 
